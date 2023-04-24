@@ -11,18 +11,38 @@ public class VariableTextUpdateEvent : UnityEvent<Variable> {  }
 public class VariableTextHolder : MonoBehaviour
 {
     public VariableTextUpdateEvent updateTextEvent;
+    public List<Variable> variables;
+    public TMP_Text textHolder;
 
-    // private List<GameObject> _textToUse;
-    public GameObject textUITemplate;
-
-    private void Start() {
+    private void Awake() {
         updateTextEvent?.AddListener(UpdateText);
+    }
+
+    public void UpdateText()
+    {
+        ClearText();
+
+        foreach (Variable var in variables)
+        {
+            textHolder.text += "\n" + var.variableName + ": " + var.GetVariableValue();
+        }
     }
 
     public void UpdateText(Variable variable)
     {
-        // im too lazy to make get mothods so, eiei
-        GameObject newText = GameObject.Instantiate(textUITemplate, transform);
-        newText.GetComponent<TMP_Text>().text = variable.gameObject.GetComponentInChildren<TMP_Text>().text;
+        if (variable != null && !variables.Contains(variable))
+            variables.Add(variable);
+
+        ClearText();
+
+        foreach (Variable var in variables)
+        {
+            textHolder.text += "\n" + var.variableName + ": " + var.GetVariableValue();
+        }
+    }
+
+    public void ClearText()
+    {
+        textHolder.text = "";
     }
 }

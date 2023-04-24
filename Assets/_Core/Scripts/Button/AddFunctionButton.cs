@@ -6,7 +6,7 @@ using Thesis;
 public class AddFunctionButton : MonoBehaviour
 {   
     [SerializeField] private BaseClass targetObject;
-    [SerializeField] private BaseMethod baseMethod;
+    // [SerializeField] private BaseMethod baseMethod;
 
     private Collider _collider;
     private bool isAdded = false;
@@ -23,7 +23,7 @@ public class AddFunctionButton : MonoBehaviour
 
             isAdded = true;
 
-            targetObject._methods.Add(baseMethod);
+            // targetObject._methods.Add(baseMethod);
             targetObject.StopExecute();
             targetObject.StartExecute();
         }

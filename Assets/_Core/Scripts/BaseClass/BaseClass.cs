@@ -15,13 +15,16 @@ namespace Thesis
 
         [Header("Methods & Variables")]
         public List<Method> _methods;
-        public List<VariableType> _variables;
+        // public List<VariableType> _variables;
     
-        public GameObject variableUIPanel;
-        public GameObject methodUIPanel;
+        public List<Method> methods;
+        public List<Variable> variables;
+    
+        public VariableTextHolder variableUIPanel;
+        public MethodTextHolder methodUIPanel;
 
         [Header("Time Interval")]
-        [SerializeField] private float _nextUpdateOffset = 1f;
+        [SerializeField] private float _nextUpdateOffset = 3f;
 
         [Header("Setting")]
         [SerializeField] private bool isJumpingAtAction = false;
@@ -45,62 +48,38 @@ namespace Thesis
 
         #endregion
     
-        private void OnCollisionEnter(Collision other) {
-            if (other.gameObject.TryGetComponent(out Variable variable))
-            {
-                if (!_variables.Contains(variable.variableType))
-                {
-                    _variables.Add(variable.variableType);
-                    other.gameObject.SetActive(false);
-
-                    // Invoke variable text holder to update UI panel in baseclass boy
-                    variableUIPanel.GetComponent<VariableTextHolder>().updateTextEvent?.Invoke(variable);
-                }
-            }
-    
-            if (other.gameObject.TryGetComponent(out Method method))
-            {
-                StopAllCoroutines();
-    
-                if (!_methods.Contains(method) && _variables.Contains(method.variableNeeded))
-                {
-                    _methods.Add(method);
-                    
-                    other.gameObject.SetActive(false);
-                    
-                    methodUIPanel.GetComponent<MethodTextHolder>().updateTextEvent?.Invoke(method);
-
-                    if (isMovable)
-                        StartExecute();
-                }
-            }
-        }
-    
         private IEnumerator ExecuteMethods()
         {
-            while (true)
+            bool did = false;
+            while (!did)
             {
-                if (_methods.Count > 0)
+                if (methods.Count > 0)
                 {
-                    foreach (Method method in _methods)
+                    foreach (Method method in methods)
                     {
-                        method.Action(this.gameObject);
+                        while (!method.variable.IsReachMax())
+                        {
+                            method.variable.ChangeVariableValue();
 
-                        Debug.Log(Time.time + " " + method.gameObject.name);
-    
-                        yield return new WaitForSeconds(_nextUpdateOffset);
+                            method.Action(this);
+
+                            yield return new WaitForSeconds(_nextUpdateOffset);
+
+                            variableUIPanel.UpdateText();
+                        }
                     }
                 }
                 
                 yield return new WaitForSeconds(1f);
                 Debug.Log(Time.time);
+                did = true;
             }
         }
 
         public void StartExecute()
         {
             if (isJumpingAtAction)
-                transform.DOJump(transform.position, 1, 2, 2f).OnComplete(() => StartCoroutine(ExecuteMethods()));
+                StartCoroutine(ExecuteMethods());
             else
                 StartCoroutine(ExecuteMethods());
         }
