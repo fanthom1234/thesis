@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using Thesis;
 using System.Linq;
@@ -6,15 +7,11 @@ namespace Thesis
 {
     public abstract class Method : MonoBehaviour
     {
-        // public abstract Transform targetTF { get; }
-        // public abstract float actingDuration { get; }
-        // public abstract VariableType variableNeeded { get; }
-        // public abstract void Action(GameObject from);
         #region Properties
     
         public Variable variable;
         public string methodName => gameObject.name;
-        public abstract void Action(BaseClass baseClass);
+        public abstract IEnumerator Action(BaseClass baseClass);
     
         #endregion
     

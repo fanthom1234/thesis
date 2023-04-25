@@ -19,7 +19,10 @@ namespace Thesis
         public Variable[] affectVariables;
 
         public abstract bool IsReachMax();
+        public abstract bool IsReachMin();
         public abstract string GetVariableValue();
+        public abstract void IncreaseVariableValue();
+        public abstract void DecreaseVariableValue();
         public abstract void ChangeVariableValue();
 
         #endregion

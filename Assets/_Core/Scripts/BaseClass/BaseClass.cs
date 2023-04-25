@@ -14,9 +14,6 @@ namespace Thesis
         public bool isMovable = true;
 
         [Header("Methods & Variables")]
-        public List<Method> _methods;
-        // public List<VariableType> _variables;
-    
         public List<Method> methods;
         public List<Variable> variables;
     
@@ -57,21 +54,22 @@ namespace Thesis
                 {
                     foreach (Method method in methods)
                     {
-                        while (!method.variable.IsReachMax())
+                        while(true)
                         {
-                            method.variable.ChangeVariableValue();
-
-                            method.Action(this);
-
+                            StartCoroutine(method.Action(this));
                             yield return new WaitForSeconds(_nextUpdateOffset);
-
+                            method.variable.ChangeVariableValue();
                             variableUIPanel.UpdateText();
+
+                            if (method.variable.IsReachMax() || method.variable.IsReachMin())
+                                break;
                         }
+                        Debug.Log("Done");
                     }
                 }
                 
                 yield return new WaitForSeconds(1f);
-                Debug.Log(Time.time);
+                // Debug.Log(Time.time);
                 did = true;
             }
         }

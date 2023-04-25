@@ -4,22 +4,42 @@ namespace Thesis
 {
     public class VariableInt : Variable
     {
-        [Range(1, 4)]
-        private int _variableValue = 1;
+        public int minValue = 1;
+        public int maxValue = 4;
+        public int variableValue = 1;
+        public bool isIncrease = false;
 
-        public override bool IsReachMax() => _variableValue == 4;
+        public override bool IsReachMax() => variableValue == maxValue;
+
+        public override bool IsReachMin() => variableValue == minValue;
 
         public override string GetVariableValue()
         {
-            return _variableValue.ToString(); 
+            return variableValue.ToString(); 
         }
 
         public override void ChangeVariableValue()
         {
-            if (_variableValue < 4)
-                _variableValue++;
+            if (isIncrease)
+                IncreaseVariableValue();
+            else
+                DecreaseVariableValue();
+        }
+
+        public override void IncreaseVariableValue()
+        {
+            if (variableValue < maxValue)
+                variableValue++;
             else 
-                _variableValue = 1;
+                variableValue = minValue;
+        }
+
+        public override void DecreaseVariableValue()
+        {
+            if (variableValue > 1)
+                variableValue--;
+            else 
+                variableValue = maxValue;
         }
     }
 

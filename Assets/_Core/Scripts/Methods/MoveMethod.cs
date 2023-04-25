@@ -7,25 +7,29 @@ namespace Thesis
 {
     public class MoveMethod : Method
     {
-        public Transform destination;
+        public List<Transform> destinations;
 
-        public override void Action(BaseClass baseClass)
+        public override IEnumerator Action(BaseClass baseClass)
         {
             Transform baseClassTF = baseClass.gameObject.transform;
 
-            if (Vector3.Distance(baseClassTF.position, destination.position) <= 0.1)
+            foreach (Transform destination in destinations)
             {
-                Jump(baseClassTF);
-                return;
-            }
-
-            baseClassTF
-                .DOMove(destination.position, 2.5f)
-                .SetEase(Ease.OutCubic)
-                .OnComplete(() => {
-                    baseClassTF.DOLookAt(Player.playerTF.position, 1.5f);
+                if (Vector3.Distance(baseClassTF.position, destination.position) <= 0.1)
+                {
                     Jump(baseClassTF);
-                });
+                }
+
+                baseClassTF
+                    .DOMove(destination.position, 2.5f)
+                    .SetEase(Ease.OutCubic)
+                    .OnComplete(() => {
+                        baseClassTF.DOLookAt(Player.playerTF.position, 1.5f);
+                        Jump(baseClassTF);
+                    });
+            }
+            
+            yield return null;
         }
 
         private void Jump(Transform go)
