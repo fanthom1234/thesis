@@ -12,6 +12,8 @@ namespace Thesis
     
         [Header("Required")]
         public bool isMovable = true;
+        public string className = "object";
+        public Transform afterMergeClassTF;
 
         [Header("Methods & Variables")]
         public List<Method> methods;
@@ -30,12 +32,16 @@ namespace Thesis
     
         private void Start() {
             Cursor.lockState = CursorLockMode.Locked;
+
+            UpdatePanel();
         }
     
         #region OnEnable/OnDisable
 
         private void OnEnable() {
-            StartExecute();
+            // gameObject.transform.DOJump(gameObject.transform.position, 1, 2, 2f);
+
+            // StartExecute();
         }
 
         private void OnDisable() {
@@ -47,19 +53,20 @@ namespace Thesis
     
         private IEnumerator ExecuteMethods()
         {
-            bool did = false;
-            while (!did)
+            while (true && isMovable)
             {
                 if (methods.Count > 0)
                 {
                     foreach (Method method in methods)
                     {
+                        // gameObject.transform.DOJump(gameObject.transform.position, 1, 2, 2f);
+
                         while(true)
                         {
                             StartCoroutine(method.Action(this));
                             yield return new WaitForSeconds(_nextUpdateOffset);
                             method.variable.ChangeVariableValue();
-                            variableUIPanel.UpdateText();
+                            UpdatePanel();
 
                             if (method.variable.IsReachMax() || method.variable.IsReachMin())
                                 break;
@@ -69,8 +76,6 @@ namespace Thesis
                 }
                 
                 yield return new WaitForSeconds(1f);
-                // Debug.Log(Time.time);
-                did = true;
             }
         }
 
@@ -85,6 +90,25 @@ namespace Thesis
         public void StopExecute()
         {
             StopAllCoroutines();
+        }
+
+        public void UpdatePanel()
+        {
+            if (variables.Count > 0)
+            {
+                foreach (Variable var in variables)
+                {
+                    variableUIPanel?.UpdateText(variables);
+                }
+            }
+
+            if (methods.Count > 0)
+            {
+                foreach (Method method in methods)
+                {
+                    methodUIPanel?.UpdateText(methods);
+                }
+            }
         }
     }
 }

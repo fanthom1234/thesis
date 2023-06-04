@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 using UnityEngine.Events;
 using Thesis;
 
@@ -24,9 +25,22 @@ public class InstantiateButton : MonoBehaviour
             newGameObject.GetComponent<Drag>().SetDrag(true);
             newGameObject.GetComponent<Rigidbody>().isKinematic = false;
             newGameObject.GetComponent<BaseClass>().isMovable = true;
+            // List<Method> methods = newGameObject.GetComponent<BaseClass>().methods;
+            // List<Method> newMethod = new List<Method>();
+            // foreach (Method met in methods)
+            // {
+            //     Method tmpMed = Method.Instantiate(met, transform);
+            //     newMethod.Add(tmpMed);
+            // }
+
+            // methods.Clear();
+
+            // foreach (Method met in newMethod)
+            // {
+            //     methods.Add(met);
+            // }
 
             onClickButton?.Invoke();
-            Debug.Log("skadi");
         }
     }
 }

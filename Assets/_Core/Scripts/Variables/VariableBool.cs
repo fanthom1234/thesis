@@ -18,6 +18,14 @@ namespace Thesis
         public override void ChangeVariableValue()
         {
             variableValue = !variableValue;
+
+            if (affectVariables.Count > 0)
+            {
+                foreach (Variable variable in affectVariables)
+                {
+                    variable.ChangeVariableValue();
+                }
+            }
         }
 
         public override void IncreaseVariableValue()

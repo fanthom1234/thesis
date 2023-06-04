@@ -2,6 +2,7 @@ using System.Collections;
 using UnityEngine;
 using Thesis;
 using System.Linq;
+using TMPro;
 
 namespace Thesis
 {
@@ -10,37 +11,60 @@ namespace Thesis
         #region Properties
     
         public Variable variable;
-        public string methodName => gameObject.name;
+        public string methodName;
+        public TMP_Text methodNameUI;
         public abstract IEnumerator Action(BaseClass baseClass);
-    
+        protected GameObject baseClassGO;
+
         #endregion
     
+        private void Start() {
+            methodName = gameObject.name;
+        }
+
         #region OnCollisionEnter
     
-        private void OnCollisionEnter(Collision other) {
-            if (other.gameObject.TryGetComponent(out BaseClass baseClass))
+        protected virtual void OnCollisionEnter(Collision other) {
+            if (other.gameObject.TryGetComponent(out Variable variable))
             {
-                if (!baseClass.variables.Any(var => var.variableName == variable.variableName))
+                if (this.variable != null)
                     return;
 
-                foreach (var var in baseClass.variables)
-                {
-                    if (var.variableName == variable.variableName)
-                        variable = var;
-                }
+                this.variable = variable;
+                methodNameUI.text += " *";
+            }
+
+            if (other.gameObject.TryGetComponent(out BaseClass baseClass))
+            {
+                baseClass.StopExecute();
+
+                // Get gameobject for method action
+                baseClassGO = baseClass.gameObject;
+
+                if (!baseClass.variables.Any(var => var == this.variable))
+                    return;
+
+                // foreach (var var in baseClass.variables)
+                // {
+                //     if (var.variableName == variable.variableName)
+                //         variable = var;
+                // }
                     
     
-                if (baseClass.methods.Any(method => method.methodName == this.methodName)) 
+                if (baseClass.methods.Any(method => method == this)) 
                 {
-                    this.gameObject.SetActive(false);
+                    // this.gameObject.SetActive(false);
                     return;
                 }
 
                 baseClass.methods.Add(this);
 
-                baseClass.methodUIPanel.GetComponent<MethodTextHolder>().updateTextEvent?.Invoke(this);
+                baseClass.UpdatePanel();
     
-                this.gameObject.SetActive(false);
+                // this.gameObject.SetActive(false);
+                this.gameObject.transform.position = baseClass.afterMergeClassTF.position;
+
+                // baseClass.StartExecute();
             }
         }
     

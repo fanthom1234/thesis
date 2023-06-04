@@ -6,6 +6,7 @@ using Thesis;
 
 public class OpenVariablePanel : MonoBehaviour
 {
+    public List<GameObject> otherPanels;
     public VariablePanel variablePanel;
     GraphicRaycaster raycaster;
 
@@ -18,7 +19,7 @@ public class OpenVariablePanel : MonoBehaviour
     void Update()
     {
         //Check if the left Mouse button is clicked
-        if (Input.GetKeyDown(KeyCode.Mouse0) && !VariablePanel.isOpen)
+        if (Input.GetKeyDown(KeyCode.Mouse1) && !VariablePanel.isOpen)
         {
             //Set up the new Pointer Event
             PointerEventData pointerData = new PointerEventData(EventSystem.current);
@@ -32,8 +33,15 @@ public class OpenVariablePanel : MonoBehaviour
             foreach (RaycastResult result in results)
             {
                 Debug.Log("Hit " + result.gameObject.name);
-                if (result.gameObject.name == "VariablePanel")
+                if (result.gameObject.name == "VariablePanel" || result.gameObject.name == "MethodPanel" || result.gameObject.tag == "Object")
                 {
+                    foreach (GameObject panel in otherPanels)
+                    {
+                        if (panel.activeSelf == true)
+                        {
+                            return;
+                        }
+                    }
                     variablePanel.Open(result.gameObject.GetComponentInParent<BaseClass>());
                 }
             }

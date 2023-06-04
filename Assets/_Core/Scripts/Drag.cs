@@ -31,10 +31,10 @@ public class Drag : MonoBehaviour
     }
     
     private void OnMouseUp() {
-        if (gameObject.TryGetComponent(out BaseClass baseClass))
-        {
-            baseClass.enabled = true;
-        }
+        // if (gameObject.TryGetComponent(out BaseClass baseClass))
+        // {
+        //     baseClass.enabled = true;
+        // }
     }
 
     private Vector3 GetMouseWorldPos()

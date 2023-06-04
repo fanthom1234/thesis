@@ -20,6 +20,14 @@ namespace Thesis
 
         public override void ChangeVariableValue()
         {
+            if (affectVariables.Count > 0)
+            {
+                foreach (Variable variable in affectVariables)
+                {
+                    variable.ChangeVariableValue();
+                }
+            }
+            
             if (isIncrease)
                 IncreaseVariableValue();
             else
@@ -42,5 +50,4 @@ namespace Thesis
                 variableValue = maxValue;
         }
     }
-
 }

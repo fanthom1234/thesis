@@ -1,21 +1,20 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 using DG.Tweening;
 
 namespace Thesis
 {
     public class MoveMethod : Method
     {
-        public List<Transform> destinations;
-
         public override IEnumerator Action(BaseClass baseClass)
         {
             Transform baseClassTF = baseClass.gameObject.transform;
 
-            foreach (Transform destination in destinations)
+            foreach (Transform destination in variable.destinations)
             {
-                if (Vector3.Distance(baseClassTF.position, destination.position) <= 0.1)
+                if (Vector3.Distance(baseClassTF.position, destination.position) <= 0.01)
                 {
                     Jump(baseClassTF);
                 }
