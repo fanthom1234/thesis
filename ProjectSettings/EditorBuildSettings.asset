@@ -4,5 +4,20 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
-  m_configObjects: {}
+  m_Scenes:
+  - enabled: 0
+    path: Assets/_Core/Scenes/_Variable.unity
+    guid: 9fc0d4010bbf28b4594072e72b8655ab
+  - enabled: 0
+    path: Assets/_Core/Scenes/_Tree.unity
+    guid: 96d06ee6d8db5fa458d28bbe1f661d0a
+  - enabled: 1
+    path: Assets/_Core/Scenes/_Variable VR.unity
+    guid: 3cf6bc9973c17f24a8fdbe54e35db8e9
+  - enabled: 1
+    path: Assets/_Core/Scenes/_Tree VR.unity
+    guid: 8ead90931cfa0b44a994e98df0a50680
+  m_configObjects:
+    Unity.XR.Oculus.Settings: {fileID: 11400000, guid: 89f0d37a0eca26248af6860f7668f692, type: 2}
+    com.unity.xr.management.loader_settings: {fileID: 11400000, guid: 79532f3d040c427408f8cf30fc464b88, type: 2}
+    com.unity.xr.openxr.settings4: {fileID: 11400000, guid: fbc5b711bf1fb1c47927edd48fbbfd30, type: 2}

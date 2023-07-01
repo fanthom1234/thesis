@@ -42,7 +42,7 @@ public class VariableEnumColor : Variable
                 materialIndex++;
                 targetRenderer.material = presetMaterials[materialIndex];
             }
-            if (materialIndex >= presetMaterials.Length)
+            else if (materialIndex >= presetMaterials.Length - 1)
                 materialIndex = 0;
         }
     }
@@ -50,12 +50,12 @@ public class VariableEnumColor : Variable
     {
         if (targetRenderer != null)
         {
-            if (materialIndex <= presetMaterials.Length)
+            if (materialIndex <= presetMaterials.Length && materialIndex > 0)
             {
                 materialIndex--;
                 targetRenderer.material = presetMaterials[materialIndex];
             }
-            if (materialIndex <= 0)
+            else if (materialIndex <= 0)
                 materialIndex = 0;
         }
     }

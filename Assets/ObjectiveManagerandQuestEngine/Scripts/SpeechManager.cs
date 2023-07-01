@@ -21,16 +21,18 @@ namespace ObjectiveManagerandQuestEngine
         {
             Text_Speaker.text = speaker;
             Text_SpeechText.text = "";
+            Panel_Speech.SetActive(true);
+            Debug.Log("text yo");
             if (lastRoutine != null)
             {
                 StopCoroutine(lastRoutine);
             }
             lastRoutine = StartCoroutine(ShowText(speech));
-            Panel_Speech.SetActive(true);
             if (hideSpeech != null)
             {
                 StopCoroutine(hideSpeech);
             }
+
             hideSpeech = HidetheSpeech();
             LastSpeakingTime = Time.time;
             StartCoroutine(hideSpeech);
@@ -38,8 +40,10 @@ namespace ObjectiveManagerandQuestEngine
 
         private IEnumerator hideSpeech;
 
+        // writing animation
         IEnumerator ShowText(String speech)
         {
+            // make it finsih before finish
             for (int i = 0; i < speech.Length; i++)
             {
                 yield return new WaitForSeconds(0.02f);
@@ -47,21 +51,23 @@ namespace ObjectiveManagerandQuestEngine
             }
         }
 
+        // Last text slide before move on to next mission
         IEnumerator HidetheSpeech()
         {
-            yield return new WaitForSeconds(8);
+            yield return new WaitForSeconds(120);
             Panel_Speech.SetActive(false);
+            // yield return null;
         }
 
         [HideInInspector]
         public float LastSpeakingTime = 0;
 
-        private void Update()
-        {
-            if (Input.GetKeyUp(KeyCode.E))
-            {
-                LastSpeakingTime = Time.time-4;
-            }
-        }
+        // private void Update()
+        // {
+        //     if (Input.GetKeyUp(KeyCode.E))
+        //     {
+        //         LastSpeakingTime = Time.time - 20;
+        //     }
+        // }
     }
 }

@@ -4,7 +4,7 @@ using DG.Tweening;
 
 public class Drag : MonoBehaviour
 {   
-    [SerializeField] private bool _canDrag = true;
+    [SerializeField] public bool _canDrag = true;
 
     private Vector3 _mOffset;
     private float _mZCoord;
@@ -13,11 +13,11 @@ public class Drag : MonoBehaviour
         if (!_canDrag)
             return;
 
-        if (gameObject.TryGetComponent(out BaseClass baseClass))
-        {
-            baseClass.transform.DOKill();
-            baseClass.enabled = false;
-        }
+        // if (gameObject.TryGetComponent(out BaseClass baseClass))
+        // {
+        //     baseClass.transform.DOKill();
+        //     baseClass.enabled = false;
+        // }
 
         _mZCoord = Camera.main.WorldToScreenPoint(gameObject.transform.position).z;
         _mOffset = gameObject.transform.position - GetMouseWorldPos();

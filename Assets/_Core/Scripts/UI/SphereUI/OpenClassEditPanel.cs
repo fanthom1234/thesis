@@ -6,7 +6,7 @@ using TMPro;
 
 public class OpenClassEditPanel : MonoBehaviour
 {
-    public ClassEditPanel classEditPanel;
+    public VariablePanel classEditPanel;
     public TMP_Text  classNameText;
 
     // Update is called once per frame
@@ -19,11 +19,17 @@ public class OpenClassEditPanel : MonoBehaviour
 
             if (Physics.Raycast(ray, out hit))
             {
-                if (hit.collider.gameObject.tag == "ClassSphere" && !classEditPanel.isOpen)
+                // if (hit.collider.gameObject.tag == "ClassSphere" && !classEditPanel.isOpen)
+                if (hit.collider.gameObject == this.gameObject && !VariablePanel.isOpen)
                 {
                     classEditPanel.Open(gameObject.GetComponent<BaseClass>(), classNameText);
                 }
             }
         }
+    }
+
+    public void TryOpenClassEditPanel()
+    {
+        classEditPanel.Open(gameObject.GetComponent<BaseClass>(), classNameText);
     }
 }

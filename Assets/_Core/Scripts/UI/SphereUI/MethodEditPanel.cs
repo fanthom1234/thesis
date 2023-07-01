@@ -8,7 +8,7 @@ using System;
 public class MethodEditPanel : MonoBehaviour
 {
     public bool isOpen;
-
+    public bool isPauseTime = true;
     // Change name
     public TMP_InputField inputField;
     private TMP_Text varTmpText;
@@ -25,7 +25,10 @@ public class MethodEditPanel : MonoBehaviour
         this.baseMethod = method;
         gameObject.SetActive(true);
         // transform to spawn in each mentor
-        Time.timeScale = 0;
+        if (isPauseTime)
+            Time.timeScale = 0;
+        else
+            Time.timeScale = 1;
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
         isOpen = true;

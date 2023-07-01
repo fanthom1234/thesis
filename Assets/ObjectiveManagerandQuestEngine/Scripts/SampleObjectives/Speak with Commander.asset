@@ -15,7 +15,7 @@ MonoBehaviour:
   Title: Speak Commander
   Description: Speak with Commander and get an order!
   Icon: {fileID: 21300000, guid: 271ed95940e731f428772b3e59f1762a, type: 3}
-  isDone: 0
+  isDone: 1
   Reward: 0
   Type: 3
   countType: 0
@@ -23,7 +23,7 @@ MonoBehaviour:
   - I am your Commander!
   - Here is a Battle Valley!
   - Obey my Orders and Be a Hero Now!
-  SpeecIndex: 0
+  SpeecIndex: 3
   Speecher: Commander
   ObjectiveActorName: Commander
   ObjectiveAmount: 1

@@ -1,0 +1,45 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3495ae5410a8e48ae928d05c28b11952, type: 3}
+  m_Name: 3_Go to commander
+  m_EditorClassIdentifier: 
+  Title: Speak with commander
+  Description: Speak with commander
+  Icon: {fileID: 21300056, guid: 8a6abc2d357c9ec49a20e27b8907de9a, type: 3}
+  isDone: 0
+  Reward: 0
+  Type: 3
+  countType: 0
+  Speeches:
+  - Hi junior! The situation is getting worse, we need to get to Earth as fast as
+    possible.
+  - Before we go I'll teach you the basic of Object-Oriented Programming(OOP), one
+    of the foundation of our power.
+  - OOP is a programming technique that organizes code and data into reusable structures
+    called objects. Basically, we will program an object given behavior and property.
+  - There is a concept called Classes in OOP. Classes define the properties (variable)
+    and behaviors (methods) of objects. A class acts as a blueprint or template for
+    creating objects with predefined variables and methods.
+  - I talked too much. Let's dive into practical test. Behind me there's a manual
+    to make a burger. Follow it, after finish, drag and drop burger on me to show
+    that you're ready to go to Earth. GOOD LUCK!
+  SpeecIndex: 0
+  Speecher: 
+  ObjectiveActorName: 
+  ObjectiveAmount: 0
+  ShowWaypoint: 0
+  TriggerAnEventIfObjectiveIsDone: 0
+  ObjectNameForTrigger: 
+  ObjectTagForTrigger: 
+  EventNameForTrigger: 
+  ResetObjectiveAmount: 0
+  ResetSpeechIndex: 0

@@ -5,6 +5,15 @@ using System.Linq;
 
 namespace Thesis
 {
+    public enum VariableType
+    {
+        Bool,
+        Color,
+        Graphic,
+        Int,
+        String,
+    }
+
     public abstract class Variable : MonoBehaviour
     {
         #region  Properties
@@ -15,6 +24,10 @@ namespace Thesis
         public string variableName;
         public List<Variable> affectVariables;
         public bool isPrivate;
+        public GameObject vfxPrefab;
+        public GameObject lineRenderer_glow;
+        public GameObject lineRenderer_noglow;
+        public VariableType variableType;
 
         public abstract bool IsReachMax();
         public abstract bool IsReachMin();
@@ -27,26 +40,37 @@ namespace Thesis
 
         private void Start() {
             variableName = gameObject.name;
+            if (variableName.Contains("VariableSphere"))
+            {
+                string[] split = variableName.Split();
+                variableName = split[1];
+            }
         }
 
         #region  OnCollisionEnter
 
-        private void OnCollisionEnter(Collision other) {
+        private void OnTriggerEnter(Collider other) {
             if (other.gameObject.TryGetComponent(out Method method1))
             {
                 if (this.method != null)
                     return;
 
                 this.method = method1;
+
+                GameObject lr = GameObject.Instantiate(lineRenderer_noglow, transform.position, Quaternion.identity);
+                lr.GetComponent<LinkLineBehav>().SetLinePoints(gameObject.transform, method1.transform);
+                lr.SetActive(true);
             }
 
             if (other.gameObject.TryGetComponent(out BaseClass baseClass))
             {
-                baseClass.StopExecute();
+                if (this.method == null)
+                    return;
+                // baseClass.StopExecute();
 
                 if (baseClass.variables.Any(var => var.variableName == this.variableName))
                 {
-                    this.gameObject.SetActive(false);
+                    // this.gameObject.SetActive(false);
                     return;
                 }
 
@@ -78,9 +102,16 @@ namespace Thesis
                 baseClass.UpdatePanel();
                 
                 // this.gameObject.SetActive(false);
-                this.gameObject.transform.position = baseClass.afterMergeClassTF.position;
 
                 // baseClass.StartExecute();
+
+                // GameObject lr = GameObject.Instantiate(lineRenderer_glow, transform.position, Quaternion.identity);
+                // lr.GetComponent<LinkLineBehav>().SetLinePoints(gameObject.transform, method1.transform);
+
+                GameObject vfxObject = GameObject.Instantiate(vfxPrefab, transform.position, Quaternion.identity);
+                vfxObject.SetActive(true);
+                Destroy(vfxObject, 3f);
+                // this.gameObject.transform.position = baseClass.afterMergeClassTF.position;
             }
         }
 

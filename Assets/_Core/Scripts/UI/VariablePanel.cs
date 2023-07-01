@@ -8,6 +8,8 @@ namespace Thesis
 {
     public class VariablePanel : MonoBehaviour
     {
+        public bool isPauseTime = true;
+
         public static bool isOpen = false;
         public BaseClass baseClass;
 
@@ -15,16 +17,42 @@ namespace Thesis
         public GameObject methodInputTemplate;
         public GameObject privateVariableInputTemplate;
 
+        public Button showBut;
+        public Button hideBut;
+
         public Transform parentTF;
 
-        public void Open(BaseClass baseClass)
+        // Class name input field
+        public TMP_InputField inputField;
+
+        private TMP_Text classTmpText;
+
+        public void Open(BaseClass baseClass, TMP_Text tMP_Text)
         {
-            if (baseClass.variables.Count == 0)
-                return;
+            // if (baseClass.variables.Count == 0)
+            //     return;
                 
+            this.classTmpText = tMP_Text;
+
+            if (showBut != null)
+            {
+                showBut.onClick.RemoveAllListeners();
+                showBut.onClick.AddListener(baseClass.ShowBalls);
+            }
+
+            if (hideBut != null)
+            {
+                hideBut.onClick.RemoveAllListeners();
+                hideBut.onClick.AddListener(baseClass.HideBalls);
+            }
+
+
             this.baseClass = baseClass;
             gameObject.SetActive(true);
-            Time.timeScale = 0;
+            if (isPauseTime)
+                Time.timeScale = 0;
+            else
+                Time.timeScale = 1;
             Cursor.visible = true;
             Cursor.lockState = CursorLockMode.None;
             isOpen = true;
@@ -36,7 +64,9 @@ namespace Thesis
             baseClass.UpdatePanel();
             gameObject.SetActive(false);
             Cursor.lockState = CursorLockMode.Locked;
+
             Time.timeScale = 1;
+
             Cursor.visible = false;
             isOpen = false;
         }
@@ -85,6 +115,23 @@ namespace Thesis
                 });
             }
         }
+
+    public void UpdateClassName()
+    {
+        this.baseClass.className = inputField.text;
+        classTmpText.text = inputField.text;
+        Close();
+    }
+
+    public void CreateObject()
+    {
+        GameObject copiedObject = GameObject.Instantiate(this.baseClass.gameObject, transform.position, Quaternion.identity);
+        Vector3 newPosition = this.baseClass.transform.position + new Vector3(0f, 0f, -2f);
+        copiedObject.transform.position = newPosition;
+        copiedObject.transform.SetParent(this.baseClass.transform.parent);
+        copiedObject.GetComponent<Drag>()._canDrag = true;
+        Close();
+    }
     }
 }
 

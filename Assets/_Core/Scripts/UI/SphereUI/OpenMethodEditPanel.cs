@@ -19,11 +19,17 @@ public class OpenMethodEditPanel : MonoBehaviour
 
             if (Physics.Raycast(ray, out hit))
             {
-                if (hit.collider.gameObject.tag == "MethodSphere" && !methodEditPanel.isOpen)
+                // if (hit.collider.gameObject.tag == "MethodSphere" && !methodEditPanel.isOpen)
+                if (hit.collider.gameObject == this.gameObject && !methodEditPanel.isOpen)
                 {
                     methodEditPanel.Open(gameObject.GetComponent<MethodAction>(), methNameTmpText);
                 }
             }
         }
+    }
+
+    public void OpenMethodEditPane()
+    {
+        methodEditPanel.Open(gameObject.GetComponent<MethodAction>(), methNameTmpText);
     }
 }

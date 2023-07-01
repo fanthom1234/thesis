@@ -4,6 +4,7 @@ using UnityEngine;
 public class LookAtPlayer : MonoBehaviour
 {
     private void Update() {
-        gameObject.transform.DOLookAt(Player.playerTF.position, 1f);
+        if (Player.playerTF != null)
+            gameObject.transform.DOLookAt(Player.playerTF.position, 1f);
     }
 }

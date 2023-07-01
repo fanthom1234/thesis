@@ -7,10 +7,11 @@ using TMPro;
 
 public class ClassEditPanel : MonoBehaviour
 {
+    public bool isPauseTime = true;
     public bool isOpen;
     public TMP_InputField inputField;
-    public TMP_Text classTmpText;
-    private BaseClass baseClass;
+    private TMP_Text classTmpText;
+    public BaseClass baseClass;
 
     public void Open(BaseClass baseClass, TMP_Text classNameText)
     {
@@ -18,7 +19,10 @@ public class ClassEditPanel : MonoBehaviour
         this.baseClass = baseClass;
         gameObject.SetActive(true);
         // transform to spawn in each mentor
-        Time.timeScale = 0;
+        if (isPauseTime)
+            Time.timeScale = 0;
+        else
+            Time.timeScale = 1;
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
         isOpen = true;
@@ -37,6 +41,15 @@ public class ClassEditPanel : MonoBehaviour
     {
         baseClass.className = inputField.text;
         classTmpText.text = inputField.text;
+        Close();
+    }
+
+    public void CreateObject()
+    {
+        GameObject copiedObject = GameObject.Instantiate(this.baseClass.gameObject, transform.position, Quaternion.identity);
+        Vector3 newPosition = this.baseClass.transform.position + new Vector3(0f, 0f, -2f);
+        copiedObject.transform.position = newPosition;
+        copiedObject.transform.SetParent(this.baseClass.transform.parent);
         Close();
     }
 }

@@ -42,7 +42,7 @@ public class OpenVariablePanel : MonoBehaviour
                             return;
                         }
                     }
-                    variablePanel.Open(result.gameObject.GetComponentInParent<BaseClass>());
+                    // variablePanel.Open(result.gameObject.GetComponentInParent<BaseClass>(), null);
                 }
             }
         }

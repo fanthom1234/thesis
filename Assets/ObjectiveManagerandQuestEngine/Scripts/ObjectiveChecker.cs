@@ -25,8 +25,15 @@ namespace ObjectiveManagerandQuestEngine
                     Collected();
                 }
             }
-        }
 
+            if (other.CompareTag("mentor"))
+            {
+                if (ObjectiveType == ObjectiveType.Count && countType == CountType.Collected)
+                {
+                    Collected();
+                }
+            }
+        }
 
         private void OnTriggerEnter2D(Collider2D other)
         {
@@ -49,7 +56,11 @@ namespace ObjectiveManagerandQuestEngine
             {
                 if (ObjectiveType == ObjectiveType.Speak)
                 {
-                    ObjectiveManager.instance.CheckObjectiveStatus(Name, ObjectiveType.Speak);
+                    if (Input.GetKey(KeyCode.E) && Time.time > LastTimeCheck + 1)
+                    {
+                        ObjectiveManager.instance.CheckObjectiveStatus(Name, ObjectiveType.Speak);
+                        LastTimeCheck = Time.time;
+                    }
                 }
                 else if (ObjectiveType == ObjectiveType.Time && Time.time > LastTimeCheck + 1)
                 {

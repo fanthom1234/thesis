@@ -1,0 +1,37 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3495ae5410a8e48ae928d05c28b11952, type: 3}
+  m_Name: 1_Speak
+  m_EditorClassIdentifier: 
+  Title: Trees
+  Description: Talk to mentor
+  Icon: {fileID: 21300000, guid: 144d5c35043c7f04193d57dc3c38bbcb, type: 3}
+  isDone: 1
+  Reward: 0
+  Type: 3
+  countType: 1
+  Speeches:
+  - 'To make a tree. First, create a "class sphere" and name it "Tree." Second, create
+    "method sphere," choose "Display" method. Third, create "variable sphere" with
+    type "Graphic" and then choose "Tree" model. Lastly, link "method sphere" and
+    "class sphere" together. Click on "class sphere" then click execute on "Display."  '
+  SpeecIndex: 2
+  Speecher: mentor
+  ObjectiveActorName: mentor
+  ObjectiveAmount: 5
+  ShowWaypoint: 1
+  TriggerAnEventIfObjectiveIsDone: 0
+  ObjectNameForTrigger: 
+  ObjectTagForTrigger: 
+  EventNameForTrigger: 
+  ResetObjectiveAmount: 5
+  ResetSpeechIndex: 0

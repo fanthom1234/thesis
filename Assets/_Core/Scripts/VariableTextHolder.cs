@@ -25,7 +25,13 @@ public class VariableTextHolder : MonoBehaviour
         {
             foreach (Variable var in variables)
             {
-                textHolder.text += var.variableName + ": " + var.GetVariableValue() + "\n";
+                if (var.variableName.Contains("VariableSphere"))
+                {
+                    string[] split = var.variableName.Split();
+                    textHolder.text += "-" + split[1] + ": " + var.GetVariableValue() + "\n";
+                }
+                
+                textHolder.text += "-" + var.variableName + ": " + var.GetVariableValue() + "\n";
             }
         }
     }

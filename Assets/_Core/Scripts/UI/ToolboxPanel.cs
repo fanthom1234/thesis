@@ -10,15 +10,22 @@ public class ToolboxPanel : MonoBehaviour
 {
     // public InputField inputField;
     public string classInputText = "ayo";
+    public bool isPauseTime = true;
 
-    [Header("Dropdown")]
+    [Header("Dropdown Var")]
     public TMP_Dropdown dropdownUI;
     public Int32 chosenVarIndex;
+
+    [Header("Dropdown Method")]
+    public TMP_Dropdown dropdownUIMethod;
+    public Int32 chosenVarIndexMethod;
 
     [Header("Templates and spawnTF")]
     public GameObject classSphereTemplate;
     public List<GameObject> variableSphereTemplate; // int color graphic
+    public List<Method> methodsSphereTemplate;
     public GameObject methodSphereTemplate;
+
     public Transform parentTF;
 
     public bool isOpen;
@@ -33,6 +40,11 @@ public class ToolboxPanel : MonoBehaviour
         chosenVarIndex = index;
     }
 
+    public void OnDropDownMethodChange(Int32 index)
+    {
+        chosenVarIndexMethod = index;
+    }
+
     // pass mentor gameobject to function
     // main func is to get spawn point
     public void Open(OpenToolbox tb)
@@ -40,7 +52,10 @@ public class ToolboxPanel : MonoBehaviour
         gameObject.SetActive(true);
         // transform to spawn in each mentor
         parentTF = tb.spawnSphere;
-        Time.timeScale = 0;
+        if (isPauseTime)
+            Time.timeScale = 0;
+        else
+            Time.timeScale = 1;
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
         isOpen = true;
@@ -79,8 +94,15 @@ public class ToolboxPanel : MonoBehaviour
         GameObject methodSphereGO = GameObject.Instantiate(methodSphereTemplate, parentTF);
         methodSphereGO.SetActive(true);
         methodSphereGO.transform.position = parentTF.position;
-        methodSphereGO.name = methodSphereGO.name.Replace("(Clone)", "");
         Close();
+
+        MethodAction baseMethod = methodSphereGO.GetComponent<MethodAction>();
+
+        baseMethod.methodName = methodsSphereTemplate[chosenVarIndexMethod].methodName;
+        baseMethod.currentMethod = methodsSphereTemplate[chosenVarIndexMethod];
+        methodSphereGO.name = methodsSphereTemplate[chosenVarIndexMethod].methodName;
+        baseMethod.methodNameUI.text = "Method: " + methodsSphereTemplate[chosenVarIndexMethod].methodName;
+        // methodSphereGO.name = methodSphereGO.name.Replace("(Clone)", "");
     }
 
     private void OnInputEndEdit(string inputClassText)

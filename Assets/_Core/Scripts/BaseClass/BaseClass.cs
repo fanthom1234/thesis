@@ -13,7 +13,8 @@ namespace Thesis
         [Header("Required")]
         public bool isMovable = true;
         public string className = "object";
-        public Transform afterMergeClassTF;
+        public Transform hideBallsTF;
+        public Transform showBallsTF;
 
         [Header("Methods & Variables")]
         public List<Method> methods;
@@ -108,6 +109,32 @@ namespace Thesis
                 {
                     methodUIPanel?.UpdateText(methods);
                 }
+            }
+        }
+
+        public void HideBalls()
+        {
+            foreach (Method method in methods)
+            {
+                method.gameObject.transform.position = hideBallsTF.position;
+            }
+
+            foreach (Variable var in variables)
+            {
+                var.gameObject.transform.position = hideBallsTF.position;
+            }
+        }
+
+        public void ShowBalls()
+        {
+            foreach (Method method in methods)
+            {
+                method.gameObject.transform.position = showBallsTF.position;
+            }
+
+            foreach (Variable var in variables)
+            {
+                var.gameObject.transform.position = showBallsTF.position;
             }
         }
     }

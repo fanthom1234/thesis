@@ -19,11 +19,17 @@ public class OpenVariableEditPanel : MonoBehaviour
 
             if (Physics.Raycast(ray, out hit))
             {
-                if (hit.collider.gameObject.tag == "VariableSphere" && !variableEditPanel.isOpen)
+                // if (hit.collider.gameObject.tag == "VariableSphere" && !variableEditPanel.isOpen)
+                if (hit.collider.gameObject == this.gameObject && !variableEditPanel.isOpen)
                 {
-                    variableEditPanel.Open(gameObject.GetComponent<Variable>(), varNameTmpText);
+                    variableEditPanel.Open(hit.collider.gameObject.GetComponent<Variable>(), varNameTmpText);
                 }
             }
         }
+    }
+
+    public void OpenVarEditPanel()
+    {
+        variableEditPanel.Open(this.gameObject.GetComponent<Variable>(), this.varNameTmpText);
     }
 }

@@ -19,6 +19,7 @@ namespace ObjectiveManagerandQuestEngine
 
         [Header("OBJECTIVE DETAILS:")]
         [ShowWhen("Type", ObjectiveType.Speak)]
+        [TextArea(4,15)]
         public List<string> Speeches;
 
         [ShowWhen("Type", ObjectiveType.Speak)]

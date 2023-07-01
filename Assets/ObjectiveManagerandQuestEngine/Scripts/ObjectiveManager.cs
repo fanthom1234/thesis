@@ -280,8 +280,9 @@ namespace ObjectiveManagerandQuestEngine
 
         public void Speak(string Name)
         {
-            if (Time.time > SpeechManager.instance.LastSpeakingTime + 4)
-            {
+            // if (Input.GetKeyDown(KeyCode.E))
+            // if (Time.time > SpeechManager.instance.LastSpeakingTime + 20 || Input.GetKeyUp(KeyCode.E))
+            // {
                 SpeechManager.instance.LastSpeakingTime = Time.time;
                 if (CurrentObjectiveIndex >= Objectives.Count)
                 {
@@ -305,8 +306,9 @@ namespace ObjectiveManagerandQuestEngine
 
                     }
                     currentObjective.SpeecIndex++;
-                    if (currentObjective.SpeecIndex == currentObjective.Speeches.Count)
+                    if (currentObjective.SpeecIndex == currentObjective.Speeches.Count + 1)
                     {
+                        // currentObjective.SpeecIndex++;
                         if (currentObjective.Type == ObjectiveType.Speak)
                         {
                             currentObjective.isDone = true;
@@ -317,7 +319,12 @@ namespace ObjectiveManagerandQuestEngine
                             AssignObjective();
                         }
                     }
-                }
+
+                    if (currentObjective.SpeecIndex > currentObjective.Speeches.Count)
+                    {
+                        SpeechManager.instance.Panel_Speech.SetActive(false);
+                    }
+                // }
             }
         }
     }

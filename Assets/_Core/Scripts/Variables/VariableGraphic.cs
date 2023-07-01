@@ -41,7 +41,7 @@ namespace Thesis
             }
             else
             {
-                currGraphicIndex = 0;
+                currGraphicIndex = graphics.Count - 1;
             }
         }
 
@@ -50,27 +50,29 @@ namespace Thesis
             return graphics[currGraphicIndex].name;
         }
 
-        private void OnCollisionEnter(Collision other) {
-            if (other.gameObject.TryGetComponent(out BaseClass baseClass))
-            {
-                if (baseClass.variables.Any(var => var.variableName == this.variableName))
-                {
-                    this.gameObject.SetActive(false);
-                    return;
-                }
+        // private void OnCollisionEnter(Collision other) {
+        //     if (other.gameObject.TryGetComponent(out BaseClass baseClass))
+        //     {
+        //         variableName = currentGraphicName;
 
-                baseClass.gameObject.transform.GetChild(0).gameObject.SetActive(false);
+        //         if (baseClass.variables.Any(var => var.variableName == this.variableName))
+        //         {
+        //             this.gameObject.SetActive(false);
+        //             return;
+        //         }
 
-                GameObject.Instantiate(graphics[currGraphicIndex], baseClass.gameObject.transform);
+        //         baseClass.gameObject.transform.GetChild(0).gameObject.SetActive(false);
 
-                // add variable to base class
-                baseClass.variables.Add(this);
+        //         GameObject.Instantiate(graphics[currGraphicIndex], baseClass.gameObject.transform);
 
-                // update base_class's variable panel 
-                baseClass.UpdatePanel();
+        //         // add variable to base class
+        //         baseClass.variables.Add(this);
 
-                this.gameObject.SetActive(false);
-            }
-        }
+        //         // update base_class's variable panel 
+        //         baseClass.UpdatePanel();
+
+        //         this.gameObject.SetActive(false);
+        //     }
+        // }
     }
 }

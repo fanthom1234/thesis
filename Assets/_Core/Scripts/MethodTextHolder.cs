@@ -24,7 +24,7 @@ public class MethodTextHolder : MonoBehaviour
 
         foreach (Method met in methods)
         {
-            textHolder.text += met.methodName + "()\n";
+            textHolder.text += "-" + met.methodName + "()\n";
         }
     }
 

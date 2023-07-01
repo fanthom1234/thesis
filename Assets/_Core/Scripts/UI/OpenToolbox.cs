@@ -10,7 +10,7 @@ public class OpenToolbox : MonoBehaviour
     public Transform spawnSphere;
 
     private void Update() {
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(1))
         {
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit;
@@ -19,9 +19,15 @@ public class OpenToolbox : MonoBehaviour
             {
                 if (hit.collider.gameObject.tag == "mentor" && !toolboxPanel.isOpen)
                 {
+                    Debug.Log("ayo");
                     toolboxPanel.Open(this);
                 }
             }
         }
+    }
+
+    public void OpenToolBoxPanel()
+    {
+        this.toolboxPanel.Open(this);
     }
 }
