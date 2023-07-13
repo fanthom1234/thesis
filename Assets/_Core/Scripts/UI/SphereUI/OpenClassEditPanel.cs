@@ -31,5 +31,6 @@ public class OpenClassEditPanel : MonoBehaviour
     public void TryOpenClassEditPanel()
     {
         classEditPanel.Open(gameObject.GetComponent<BaseClass>(), classNameText);
+        Debug.Log("ayo");
     }
 }
