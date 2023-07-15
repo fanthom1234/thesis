@@ -15,7 +15,7 @@ MonoBehaviour:
   Title: Talk to Greeting Slime
   Description: Learn how to control, walk around and basic
   Icon: {fileID: 21300012, guid: 8a6abc2d357c9ec49a20e27b8907de9a, type: 3}
-  isDone: 1
+  isDone: 0
   Reward: 0
   Type: 3
   countType: 0
@@ -25,7 +25,7 @@ MonoBehaviour:
   - Look at a board behind me, and try to control your body corresponding.
   - Now if you're done go down the hall way to meet with instructor to review concept
     of method and variable.
-  SpeecIndex: 4
+  SpeecIndex: 0
   Speecher: Slime Greeting
   ObjectiveActorName: Slime Greeting
   ObjectiveAmount: 1
