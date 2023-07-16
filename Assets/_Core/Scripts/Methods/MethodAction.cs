@@ -17,7 +17,7 @@ namespace Thesis
                 if (currentMethod is GrowMethod)
                 {
                     GrowMethod gm = (GrowMethod)currentMethod;
-                    gm.targetScale = baseClass.gameObject.transform;
+                    //gm.targetScale = baseClass.gameObject.transform;
                     // (GrowMethod)currentMethod.targetScale = baseClass.transform;
                     currentMethod = gm;
                 }

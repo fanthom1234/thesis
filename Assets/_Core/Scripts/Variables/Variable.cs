@@ -57,9 +57,9 @@ namespace Thesis
 
                 this.method = method1;
 
-                GameObject lr = GameObject.Instantiate(lineRenderer_noglow, transform.position, Quaternion.identity);
-                lr.GetComponent<LinkLineBehav>().SetLinePoints(gameObject.transform, method1.transform);
-                lr.SetActive(true);
+                //GameObject lr = GameObject.Instantiate(lineRenderer_noglow, transform.position, Quaternion.identity);
+                //lr.GetComponent<LinkLineBehav>().SetLinePoints(gameObject.transform, method1.transform);
+                //lr.SetActive(true);
             }
 
             if (other.gameObject.TryGetComponent(out BaseClass baseClass))

@@ -76,14 +76,15 @@ namespace Thesis
 
                 baseClass.methods.Add(this);
 
-                this.gameObject.transform.parent = baseClass.transform;
-                this.variable.transform.parent = baseClass.transform;
+                //this.gameObject.transform.parent = baseClass.transform;
+                //this.variable.transform.parent = baseClass.transform;
 
                 baseClass.UpdatePanel();
     
                 GameObject lr = GameObject.Instantiate(lineRenderer_glow, transform.position, Quaternion.identity);
                 lr.GetComponent<LinkLineBehav>().SetLinePoints(gameObject.transform, baseClass.transform);
                 lr.SetActive(true);
+                lr.transform.SetParent(this.gameObject.transform);
 
                 // this.gameObject.SetActive(false);
 

@@ -114,27 +114,45 @@ namespace Thesis
 
         public void HideBalls()
         {
+            //foreach (Method method in methods)
+            //{
+            //    method.gameObject.transform.position = hideBallsTF.position;
+            //}
+
+            //foreach (Variable var in variables)
+            //{
+            //    var.gameObject.transform.position = hideBallsTF.position;
+            //}
             foreach (Method method in methods)
             {
-                method.gameObject.transform.position = hideBallsTF.position;
+                method.gameObject.SetActive(false);
             }
 
             foreach (Variable var in variables)
             {
-                var.gameObject.transform.position = hideBallsTF.position;
+                var.gameObject.SetActive(false);
             }
         }
 
         public void ShowBalls()
         {
+            //foreach (Method method in methods)
+            //{
+            //    method.gameObject.transform.position = showBallsTF.position;
+            //}
+
+            //foreach (Variable var in variables)
+            //{
+            //    var.gameObject.transform.position = showBallsTF.position;
+            //}
             foreach (Method method in methods)
             {
-                method.gameObject.transform.position = showBallsTF.position;
+                method.gameObject.SetActive(true);
             }
 
             foreach (Variable var in variables)
             {
-                var.gameObject.transform.position = showBallsTF.position;
+                var.gameObject.SetActive(true);
             }
         }
     }
