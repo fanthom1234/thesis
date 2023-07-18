@@ -2104,6 +2104,34 @@
                     "isPartOfComposite": false
                 }
             ]
+        },
+        {
+            "name": "Menu",
+            "id": "4219c5c0-c76d-4080-a3ac-c613baeca3e5",
+            "actions": [
+                {
+                    "name": "MenuPressed",
+                    "type": "Button",
+                    "id": "e3926a25-cbf6-4736-b179-73337c83e586",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "36b4e546-87c5-4bb6-8afe-1bb0050b5cde",
+                    "path": "<XRInputV1::Oculus::OculusTouchControllerOpenXR>/primarybutton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "MenuPressed",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
         }
     ],
     "controlSchemes": [
