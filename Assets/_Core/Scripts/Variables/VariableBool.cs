@@ -30,12 +30,13 @@ namespace Thesis
 
         public override void IncreaseVariableValue()
         {
-            throw new System.NotImplementedException();
+            variableValue = !variableValue;
         }
 
         public override void DecreaseVariableValue()
         {
-            throw new System.NotImplementedException();
+            variableValue = !variableValue;
+
         }
     }
 }

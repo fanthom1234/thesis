@@ -20,12 +20,22 @@ namespace Thesis
         public Button showBut;
         public Button hideBut;
 
+        public bool openWhenStart = false;
+
         public Transform parentTF;
 
         // Class name input field
         public TMP_InputField inputField;
 
         private TMP_Text classTmpText;
+
+        public void Start()
+        {
+            if (openWhenStart && baseClass != null)
+            {
+                Open(this.baseClass, classTmpText);
+            }
+        }
 
         public void Open(BaseClass baseClass, TMP_Text tMP_Text)
         {

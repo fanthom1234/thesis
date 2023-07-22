@@ -21,7 +21,6 @@ public class VariableEditPanel : MonoBehaviour
     {
         inputField.text = varNameText.text;
         this.varTmpText = varNameText;
-        Debug.Log(varTmpText);
         this.baseVariable = baseVariable;
         UpdateVariableValue();
         gameObject.SetActive(true);
